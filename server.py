@@ -37,7 +37,7 @@ def login():
     if username in users and users[username] == password:
         access_token = create_access_token(identity=username, expires_delta=datetime.timedelta(hours=1))
         response = make_response(jsonify({'message': 'Login succesful'}), 200)
-        response.set_cookie('access_token_cookie', access_token, httponly=True, path='/', samesite='None')
+        response.set_cookie('access_token_cookie', access_token, secure=True, path='/', samesite='None')
         return response
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
